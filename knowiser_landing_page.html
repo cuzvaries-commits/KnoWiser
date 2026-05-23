@@ -1,0 +1,265 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --k-bg:#05060f;--k-surface:#0d0f1e;--k-card:#131525;--k-border:#1e2140;
+    --k-accent:#6c63ff;--k-accent2:#3ecfcf;--k-accent3:#f5a623;
+    --k-text:#e8eaf6;--k-muted:#7b7fa8;--k-soft:#2a2d52;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--k-bg);color:var(--k-text);overflow-x:hidden}
+  .page{max-width:900px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:900px;margin:0 auto}
+  .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;color:var(--k-text)}
+  .logo span{color:var(--k-accent)}
+  .nav-links{display:flex;gap:6px}
+  .nav-links button{background:none;border:none;color:var(--k-muted);font-family:'DM Sans',sans-serif;font-size:14px;padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .2s}
+  .nav-links button:hover{color:var(--k-text);background:var(--k-soft)}
+  .btn-primary{background:var(--k-accent)!important;color:#fff!important;padding:8px 20px!important;border-radius:8px!important;font-weight:500!important}
+  .btn-primary:hover{opacity:.88!important;background:var(--k-accent)!important}
+
+  /* HERO */
+  .hero{padding:64px 24px 48px;max-width:900px;margin:0 auto;text-align:center}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--k-soft);border:1px solid var(--k-border);border-radius:100px;padding:6px 16px;font-size:12px;color:var(--k-accent2);margin-bottom:28px;font-weight:500;letter-spacing:.4px;text-transform:uppercase}
+  .hero-badge span{width:6px;height:6px;background:var(--k-accent2);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,64px);line-height:1.08;font-weight:900;letter-spacing:-2px;margin-bottom:20px}
+  h1 em{color:var(--k-accent);font-style:normal}
+  .hero-sub{font-size:17px;color:var(--k-muted);max-width:500px;margin:0 auto 36px;line-height:1.6;font-weight:300}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+  .cta-main{background:var(--k-accent);color:#fff;border:none;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;padding:14px 32px;border-radius:10px;cursor:pointer;transition:all .2s}
+  .cta-main:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(108,99,255,.4)}
+  .cta-sec{background:none;color:var(--k-text);border:1px solid var(--k-border);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:400;padding:14px 28px;border-radius:10px;cursor:pointer;transition:all .2s}
+  .cta-sec:hover{background:var(--k-soft);border-color:var(--k-accent)}
+  .hero-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+  .stat{text-align:center}
+  .stat-n{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--k-text)}
+  .stat-l{font-size:12px;color:var(--k-muted);margin-top:2px;letter-spacing:.3px}
+
+  /* DASHBOARD PREVIEW */
+  .dash-wrap{padding:0 24px 60px;max-width:900px;margin:0 auto}
+  .dash-frame{background:var(--k-surface);border:1px solid var(--k-border);border-radius:16px;overflow:hidden;padding:24px}
+  .dash-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+  .dash-title{font-size:15px;font-weight:500;color:var(--k-text)}
+  .streak-badge{background:rgba(245,166,35,.12);border:1px solid rgba(245,166,35,.3);color:var(--k-accent3);font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px}
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+  .metric{background:var(--k-card);border:1px solid var(--k-border);border-radius:12px;padding:16px}
+  .metric-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--k-text)}
+  .metric-lbl{font-size:11px;color:var(--k-muted);margin-top:4px;letter-spacing:.3px;text-transform:uppercase}
+  .metric-delta{font-size:11px;color:#3ecfcf;margin-top:6px}
+
+  .progress-section{margin-bottom:20px}
+  .prog-label{display:flex;justify-content:space-between;font-size:13px;color:var(--k-muted);margin-bottom:8px}
+  .prog-bar{height:6px;background:var(--k-soft);border-radius:3px;overflow:hidden}
+  .prog-fill{height:100%;border-radius:3px;transition:width .8s ease}
+
+  .cards-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mini-card{background:var(--k-card);border:1px solid var(--k-border);border-radius:12px;padding:16px}
+  .mini-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .icon-dot{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .dot-purple{background:rgba(108,99,255,.18)}
+  .dot-teal{background:rgba(62,207,207,.18)}
+  .mini-card-title{font-size:13px;font-weight:500;color:var(--k-text)}
+  .flashcard{background:var(--k-soft);border-radius:8px;padding:12px;font-size:12px;color:var(--k-muted);line-height:1.5}
+  .flashcard strong{color:var(--k-accent2);display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  .quiz-q{font-size:12px;color:var(--k-text);margin-bottom:10px;line-height:1.4}
+  .quiz-opts{display:flex;flex-direction:column;gap:5px}
+  .opt{background:var(--k-soft);border-radius:6px;padding:7px 10px;font-size:11px;color:var(--k-muted);cursor:pointer;transition:all .15s;border:1px solid transparent}
+  .opt:hover{border-color:var(--k-accent);color:var(--k-text)}
+  .opt.correct{background:rgba(62,207,207,.12);border-color:rgba(62,207,207,.4);color:var(--k-accent2)}
+
+  /* FEATURES */
+  .section{padding:48px 24px;max-width:900px;margin:0 auto}
+  .section-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--k-accent);font-weight:500;margin-bottom:10px;text-align:center}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);font-weight:700;letter-spacing:-1px;text-align:center;margin-bottom:8px}
+  .section-sub{text-align:center;color:var(--k-muted);font-size:15px;margin-bottom:40px;font-weight:300}
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .feat-card{background:var(--k-card);border:1px solid var(--k-border);border-radius:14px;padding:22px;transition:all .2s;cursor:default}
+  .feat-card:hover{border-color:var(--k-accent);transform:translateY(-3px)}
+  .feat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px}
+  .feat-name{font-size:14px;font-weight:500;margin-bottom:6px;color:var(--k-text)}
+  .feat-desc{font-size:13px;color:var(--k-muted);line-height:1.55;font-weight:300}
+
+  /* PRICING */
+  .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px;margin:0 auto}
+  .price-card{background:var(--k-card);border:1px solid var(--k-border);border-radius:16px;padding:28px}
+  .price-card.featured{border-color:var(--k-accent);background:linear-gradient(145deg,rgba(108,99,255,.08),var(--k-card))}
+  .plan-badge{font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:500;color:var(--k-accent);background:rgba(108,99,255,.15);padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:12px}
+  .plan-badge.free{color:var(--k-accent2);background:rgba(62,207,207,.12)}
+  .plan-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:4px}
+  .plan-price{font-size:32px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:4px}
+  .plan-price sub{font-size:14px;font-weight:400;color:var(--k-muted);font-family:'DM Sans',sans-serif}
+  .plan-desc{font-size:12px;color:var(--k-muted);margin-bottom:18px}
+  .plan-feats{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+  .plan-feats li{font-size:13px;color:var(--k-muted);display:flex;gap:8px;align-items:flex-start}
+  .plan-feats li::before{content:'✓';color:var(--k-accent2);font-weight:600;flex-shrink:0}
+  .plan-feats li.dim{color:var(--k-soft);pointer-events:none}
+  .plan-feats li.dim::before{color:var(--k-soft)}
+  .plan-btn{width:100%;padding:12px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border:1px solid var(--k-border);background:var(--k-soft);color:var(--k-text);transition:all .2s}
+  .plan-btn.accent{background:var(--k-accent);color:#fff;border-color:var(--k-accent)}
+  .plan-btn:hover{opacity:.85;transform:translateY(-1px)}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--k-border);padding:28px 24px;max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  .foot-logo{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--k-muted)}
+  .foot-logo span{color:var(--k-accent)}
+  .foot-links{display:flex;gap:20px}
+  .foot-links a{font-size:12px;color:var(--k-muted);text-decoration:none;cursor:pointer}
+  .foot-links a:hover{color:var(--k-text)}
+  .foot-right{font-size:12px;color:var(--k-soft)}
+</style>
+
+<nav>
+  <div class="logo">Kno<span>Wiser</span></div>
+  <div class="nav-links">
+    <button onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Features</button>
+    <button onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Pricing</button>
+    <button class="btn-primary" onclick="sendPrompt('Help me build the full KnoWiser app — start with the tech stack and folder structure')">Get started ↗</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge"><span></span> AI-powered study platform</div>
+  <h1>Learn faster.<br><em>Remember</em> longer.</h1>
+  <p class="hero-sub">Turn your notes, PDFs, and lecture transcripts into flashcards, quizzes, and personalized study plans — powered by AI.</p>
+  <div class="cta-row">
+    <button class="cta-main" onclick="sendPrompt('Build the KnoWiser onboarding flow with sign up, upload notes, and first flashcard generation')">Start studying free ↗</button>
+    <button class="cta-sec" onclick="sendPrompt('Show me a KnoWiser demo with sample flashcards and a quiz on biology')">See a demo</button>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-n">2M+</div><div class="stat-l">Students</div></div>
+    <div class="stat"><div class="stat-n">50M+</div><div class="stat-l">Flashcards created</div></div>
+    <div class="stat"><div class="stat-n">94%</div><div class="stat-l">Improved grades</div></div>
+    <div class="stat"><div class="stat-n">4.9★</div><div class="stat-l">App store rating</div></div>
+  </div>
+</div>
+
+<div class="dash-wrap">
+  <div class="dash-frame">
+    <div class="dash-top">
+      <div class="dash-title">Your dashboard — Week 3</div>
+      <div class="streak-badge">🔥 12 day streak</div>
+    </div>
+    <div class="dash-grid">
+      <div class="metric"><div class="metric-val">247</div><div class="metric-lbl">Cards reviewed</div><div class="metric-delta">↑ 18% this week</div></div>
+      <div class="metric"><div class="metric-val">84%</div><div class="metric-lbl">Accuracy</div><div class="metric-delta">↑ 6% vs last week</div></div>
+      <div class="metric"><div class="metric-val">4.2h</div><div class="metric-lbl">Study time</div><div class="metric-delta">Goal: 5h</div></div>
+      <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">Exams passed</div><div class="metric-delta">+1 new this week</div></div>
+    </div>
+    <div class="progress-section">
+      <div class="prog-label"><span>Biology Ch. 7 — Cell Division</span><span>72%</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:72%;background:linear-gradient(90deg,#6c63ff,#3ecfcf)"></div></div>
+    </div>
+    <div class="progress-section">
+      <div class="prog-label"><span>AP Chemistry — Thermodynamics</span><span>45%</span></div>
+      <div class="prog-bar"><div class="prog-fill" style="width:45%;background:linear-gradient(90deg,#f5a623,#e85d75)"></div></div>
+    </div>
+    <div class="cards-row">
+      <div class="mini-card">
+        <div class="mini-card-head"><div class="icon-dot dot-purple" aria-hidden="true"><i class="ti ti-cards" style="color:#9d97ff;font-size:14px"></i></div><div class="mini-card-title">Today's flashcard</div></div>
+        <div class="flashcard"><strong>Question</strong>What is the powerhouse of the cell?</div>
+        <div class="flashcard" style="margin-top:6px;background:rgba(62,207,207,.08);border:1px solid rgba(62,207,207,.2)"><strong style="color:var(--k-accent)">Answer</strong>The mitochondria — produces ATP via cellular respiration</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-card-head"><div class="icon-dot dot-teal" aria-hidden="true"><i class="ti ti-help-circle" style="color:#3ecfcf;font-size:14px"></i></div><div class="mini-card-title">Quick quiz</div></div>
+        <div class="quiz-q">Which process converts glucose into pyruvate?</div>
+        <div class="quiz-opts">
+          <div class="opt">Photosynthesis</div>
+          <div class="opt correct">Glycolysis ✓</div>
+          <div class="opt">Krebs cycle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="features">
+  <div class="section-label">Everything you need</div>
+  <h2 class="section-title">Study tools that actually work</h2>
+  <p class="section-sub">Upload anything. Get AI-powered study materials in seconds.</p>
+  <div class="feat-grid">
+    <div class="feat-card" onclick="sendPrompt('Show me how KnoWiser AI flashcard generation works with a PDF upload')">
+      <div class="feat-icon" style="background:rgba(108,99,255,.15)" aria-hidden="true"><i class="ti ti-cards" style="color:#9d97ff"></i></div>
+      <div class="feat-name">AI Flashcards</div>
+      <div class="feat-desc">Upload notes or PDFs and get smart flashcards generated instantly. Spaced repetition built in.</div>
+    </div>
+    <div class="feat-card" onclick="sendPrompt('Generate a sample KnoWiser multiple choice quiz on photosynthesis')">
+      <div class="feat-icon" style="background:rgba(62,207,207,.12)" aria-hidden="true"><i class="ti ti-help-circle" style="color:#3ecfcf"></i></div>
+      <div class="feat-name">Practice Quizzes</div>
+      <div class="feat-desc">Multiple choice, fill-in-the-blank, and full practice exams tailored to your material.</div>
+    </div>
+    <div class="feat-card" onclick="sendPrompt('Show me KnoWiser AI tutor chat answering a question about calculus')">
+      <div class="feat-icon" style="background:rgba(245,166,35,.12)" aria-hidden="true"><i class="ti ti-message-chatbot" style="color:#f5a623"></i></div>
+      <div class="feat-name">AI Tutor Chat</div>
+      <div class="feat-desc">Ask anything. Get instant, context-aware explanations based on your own study materials.</div>
+    </div>
+    <div class="feat-card" onclick="sendPrompt('Explain how KnoWiser spaced repetition algorithm works')">
+      <div class="feat-icon" style="background:rgba(232,93,117,.12)" aria-hidden="true"><i class="ti ti-brain" style="color:#e85d75"></i></div>
+      <div class="feat-name">Spaced Repetition</div>
+      <div class="feat-desc">Science-backed scheduling that surfaces cards right before you forget them. Proven to boost retention.</div>
+    </div>
+    <div class="feat-card" onclick="sendPrompt('Show me KnoWiser progress analytics dashboard for a student')">
+      <div class="feat-icon" style="background:rgba(62,207,207,.1)" aria-hidden="true"><i class="ti ti-chart-line" style="color:#3ecfcf"></i></div>
+      <div class="feat-name">Progress Analytics</div>
+      <div class="feat-desc">Track accuracy, streaks, weak spots, and improvement over time with beautiful visual stats.</div>
+    </div>
+    <div class="feat-card" onclick="sendPrompt('Show me KnoWiser gamification with leaderboards and achievement badges')">
+      <div class="feat-icon" style="background:rgba(245,166,35,.1)" aria-hidden="true"><i class="ti ti-trophy" style="color:#f5a623"></i></div>
+      <div class="feat-name">Gamification</div>
+      <div class="feat-desc">Daily streaks, XP, badges, and leaderboards make studying feel like leveling up.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="pricing">
+  <div class="section-label">Simple pricing</div>
+  <h2 class="section-title">Start free. Upgrade when ready.</h2>
+  <p class="section-sub">No credit card required to get started.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="plan-badge free">Free</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$0<sub>/month</sub></div>
+      <div class="plan-desc">Perfect for casual learners</div>
+      <ul class="plan-feats">
+        <li>50 AI flashcards/month</li>
+        <li>5 quiz generations</li>
+        <li>Basic AI summaries</li>
+        <li>3 document uploads</li>
+        <li class="dim">AI tutor chat</li>
+        <li class="dim">Practice exams</li>
+        <li class="dim">Spaced repetition</li>
+      </ul>
+      <button class="plan-btn" onclick="sendPrompt('Help me set up the KnoWiser free plan with Supabase auth and usage limits')">Get started free</button>
+    </div>
+    <div class="price-card featured">
+      <div class="plan-badge">Premium</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">$12<sub>/month</sub></div>
+      <div class="plan-desc">For serious students</div>
+      <ul class="plan-feats">
+        <li>Unlimited AI flashcards</li>
+        <li>Unlimited quizzes & exams</li>
+        <li>AI tutor chat (unlimited)</li>
+        <li>Spaced repetition engine</li>
+        <li>Adaptive difficulty</li>
+        <li>Study analytics & insights</li>
+        <li>Large uploads + PDFs</li>
+      </ul>
+      <button class="plan-btn accent" onclick="sendPrompt('Build the KnoWiser Stripe subscription integration for the Pro plan at $12/month')">Upgrade to Pro ↗</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-logo">Kno<span>Wiser</span></div>
+  <div class="foot-links">
+    <a onclick="sendPrompt('Generate KnoWiser privacy policy page')">Privacy</a>
+    <a onclick="sendPrompt('Generate KnoWiser terms of service page')">Terms</a>
+    <a onclick="sendPrompt('Design a KnoWiser blog page about study tips')">Blog</a>
+    <a onclick="sendPrompt('Build KnoWiser admin dashboard with user analytics')">Admin</a>
+  </div>
+  <div class="foot-right">© 2026 KnoWiser</div>
+</footer>
